@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BlueberryPro.DAL;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -24,6 +25,7 @@ namespace BlueberryPro
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddScoped<IUser, UserRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -50,7 +52,7 @@ namespace BlueberryPro
             {
                 endpoints.MapControllerRoute(
                 name: "areas",
-                pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
+                pattern: "{area:exists}/{controller=Account}/{action=Login}/{id?}"
                 );
                 endpoints.MapControllerRoute(
                 name: "default",
